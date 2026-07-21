@@ -5,15 +5,7 @@ import MarketCard from "./MarketCard";
 import RegionSelector from "./RegionSelector";
 import SearchBar from "./SearchBar";
 import MarketSummary from "./MarketSummary";
-
-const markets = [
-  { name: "NIFTY 50", flag: "🇮🇳", value: "26,120", change: "+0.72%", isPositive: true },
-  { name: "SENSEX", flag: "🇮🇳", value: "85,430", change: "+0.61%", isPositive: true },
-  { name: "NASDAQ", flag: "🇺🇸", value: "23,200", change: "-0.14%", isPositive: false },
-  { name: "S&P 500", flag: "🇺🇸", value: "6,340", change: "+0.28%", isPositive: true },
-  { name: "Nikkei 225", flag: "🇯🇵", value: "41,300", change: "+0.84%", isPositive: true },
-  { name: "Hang Seng", flag: "🇭🇰", value: "24,510", change: "-0.42%", isPositive: false },
-];
+import { majorIndices } from "@/data/markets";
 
 export default function GlobalMarkets() {
   return (
@@ -44,7 +36,7 @@ export default function GlobalMarkets() {
           transition={{ duration: 0.6, delay: 0.2 }}
           className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
         >
-          {markets.map((market, index) => (
+          {majorIndices.slice(0, 6).map((market, index) => (
             <motion.div
               key={market.name}
               initial={{ opacity: 0, y: 20 }}
@@ -55,7 +47,7 @@ export default function GlobalMarkets() {
               <MarketCard
                 name={market.name}
                 flag={market.flag}
-                value={market.value}
+                value={market.price}
                 change={market.change}
                 isPositive={market.isPositive}
               />

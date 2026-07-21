@@ -1,29 +1,9 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { marketSummary } from "@/data/markets";
 
 export default function MarketSummary() {
-  const summaryItems = [
-    {
-      title: "Top Gainer",
-      value: "NIFTY 50",
-      change: "+0.84%",
-      isPositive: true,
-    },
-    {
-      title: "Top Loser",
-      value: "Hang Seng",
-      change: "-0.42%",
-      isPositive: false,
-    },
-    {
-      title: "Most Active",
-      value: "NASDAQ",
-      change: "+0.28%",
-      isPositive: true,
-    },
-  ];
-
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -34,7 +14,7 @@ export default function MarketSummary() {
     >
       <h3 className="text-2xl font-bold text-white mb-6">Market Summary</h3>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        {summaryItems.map((item, index) => (
+        {marketSummary.map((item, index) => (
           <motion.div
             key={item.title}
             initial={{ opacity: 0, y: 10 }}

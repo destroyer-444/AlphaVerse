@@ -1,21 +1,14 @@
 "use client";
 
 import { motion } from "framer-motion";
-
-const headlines = [
-  { title: "NVIDIA surges to new all-time high", time: "15 min ago" },
-  { title: "Fed signals potential rate cut in September", time: "32 min ago" },
-  { title: "Oil prices stabilize after volatile week", time: "1 hour ago" },
-  { title: "Apple announces major AI partnership", time: "2 hours ago" },
-  { title: "European markets close mixed amid earnings", time: "3 hours ago" },
-];
+import { marketHeadlines } from "@/data/markets";
 
 export default function MarketHeadlines() {
   return (
     <div className="bg-white/[0.03] backdrop-blur-xl border border-white/10 rounded-2xl p-6">
       <h3 className="text-xl font-bold text-white mb-4">Latest Market Headlines</h3>
       <div className="space-y-3">
-        {headlines.map((item, index) => (
+        {marketHeadlines.map((item, index) => (
           <motion.div
             key={item.title}
             initial={{ opacity: 0, x: 10 }}

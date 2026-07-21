@@ -1,20 +1,14 @@
 "use client";
 
 import { motion } from "framer-motion";
-
-const events = [
-  { time: "Today 2:00 PM", event: "Fed Interest Rate Decision", impact: "High" },
-  { time: "Tomorrow 9:30 AM", event: "US GDP Release", impact: "High" },
-  { time: "Tomorrow 3:00 PM", event: "ECB Press Conference", impact: "Medium" },
-  { time: "Wednesday 10:00 AM", event: "US CPI Data", impact: "High" },
-];
+import { economicEvents } from "@/data/markets";
 
 export default function EconomicEvents() {
   return (
     <div className="bg-white/[0.03] backdrop-blur-xl border border-white/10 rounded-2xl p-6">
       <h3 className="text-xl font-bold text-white mb-4">Upcoming Economic Events</h3>
       <div className="space-y-4">
-        {events.map((item, index) => (
+        {economicEvents.map((item, index) => (
           <motion.div
             key={item.event}
             initial={{ opacity: 0, x: -10 }}

@@ -1,6 +1,16 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Link from "next/link";
+
+const nameToSymbol: Record<string, string> = {
+  "NVIDIA": "NVDA",
+  "TSMC": "TSM",
+  "ASML": "ASML",
+  "Intel": "INTC",
+  "Boeing": "BA",
+  "Nike": "NKE",
+};
 
 export default function TopGainersLosers() {
   const gainers = [
@@ -39,7 +49,12 @@ export default function TopGainersLosers() {
               className="flex items-center justify-between p-3 bg-white/5 rounded-xl hover:bg-white/10 transition-colors"
             >
               <div>
-                <p className="text-white font-medium">{stock.name}</p>
+                <Link
+                  href={`/companies/${nameToSymbol[stock.name]}`}
+                  className="text-white font-medium hover:text-blue-400 hover:underline transition-colors"
+                >
+                  {stock.name}
+                </Link>
                 <p className="text-zinc-400 text-sm">{stock.price}</p>
               </div>
               <span className="text-green-400 font-semibold">{stock.change}</span>
@@ -70,7 +85,12 @@ export default function TopGainersLosers() {
               className="flex items-center justify-between p-3 bg-white/5 rounded-xl hover:bg-white/10 transition-colors"
             >
               <div>
-                <p className="text-white font-medium">{stock.name}</p>
+                <Link
+                  href={`/companies/${nameToSymbol[stock.name]}`}
+                  className="text-white font-medium hover:text-blue-400 hover:underline transition-colors"
+                >
+                  {stock.name}
+                </Link>
                 <p className="text-zinc-400 text-sm">{stock.price}</p>
               </div>
               <span className="text-red-400 font-semibold">{stock.change}</span>

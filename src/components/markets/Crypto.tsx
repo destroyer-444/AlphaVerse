@@ -1,13 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-
-const crypto = [
-  { name: "Bitcoin", symbol: "BTC", price: "$67,450", change: "+2.4%", isPositive: true },
-  { name: "Ethereum", symbol: "ETH", price: "$3,520", change: "+1.8%", isPositive: true },
-  { name: "Solana", symbol: "SOL", price: "$145", change: "+3.1%", isPositive: true },
-  { name: "Ripple", symbol: "XRP", price: "$0.52", change: "-0.8%", isPositive: false },
-];
+import { crypto } from "@/data/markets";
 
 export default function Crypto() {
   return (

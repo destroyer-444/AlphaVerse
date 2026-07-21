@@ -4,37 +4,7 @@ import { motion } from "framer-motion";
 import FeaturedArticle from "./FeaturedArticle";
 import NewsCard from "./NewsCard";
 import FilterBar from "./FilterBar";
-
-const newsItems = [
-  {
-    headline: "Oil prices rise after Middle East tensions",
-    summary: "Geopolitical concerns drive crude oil prices higher as supply disruptions loom.",
-    time: "12 min ago",
-    category: "Markets",
-    impact: "Bullish" as const,
-  },
-  {
-    headline: "Federal Reserve hints at stable interest rates",
-    summary: "Central bank signals patience in monetary policy amid economic uncertainty.",
-    time: "25 min ago",
-    category: "Economy",
-    impact: "Neutral" as const,
-  },
-  {
-    headline: "Apple expands AI investments",
-    summary: "Tech giant increases spending on artificial intelligence research and development.",
-    time: "1 hour ago",
-    category: "Technology",
-    impact: "Bullish" as const,
-  },
-  {
-    headline: "Tesla reports stronger deliveries",
-    summary: "Electric vehicle maker exceeds expectations in quarterly delivery numbers.",
-    time: "2 hours ago",
-    category: "Technology",
-    impact: "Bullish" as const,
-  },
-];
+import { aiNewsItems } from "@/data/news";
 
 export default function AINewsIntelligence() {
   return (
@@ -65,7 +35,7 @@ export default function AINewsIntelligence() {
           <div className="lg:col-span-1">
             <FilterBar />
             <div className="space-y-4">
-              {newsItems.map((item, index) => (
+              {aiNewsItems.map((item, index) => (
                 <motion.div
                   key={item.headline}
                   initial={{ opacity: 0, y: 10 }}

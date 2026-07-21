@@ -1,24 +1,14 @@
 "use client";
 
 import { motion } from "framer-motion";
-
-const sectors = [
-  { name: "Technology", change: 2.5, status: "positive" },
-  { name: "Finance", change: 1.2, status: "positive" },
-  { name: "Energy", change: -0.8, status: "negative" },
-  { name: "Healthcare", change: 0.5, status: "positive" },
-  { name: "Consumer", change: -0.3, status: "negative" },
-  { name: "Industrials", change: 0.8, status: "positive" },
-  { name: "Utilities", change: 0.1, status: "positive" },
-  { name: "Real Estate", change: -0.5, status: "negative" },
-];
+import { heatmapSectors } from "@/data/markets";
 
 export default function MarketHeatmap() {
   return (
     <div className="bg-white/[0.03] backdrop-blur-xl border border-white/10 rounded-2xl p-6">
       <h3 className="text-xl font-bold text-white mb-4">Market Heatmap</h3>
       <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-        {sectors.map((sector, index) => (
+        {heatmapSectors.map((sector, index) => (
           <motion.div
             key={sector.name}
             initial={{ opacity: 0, scale: 0.9 }}

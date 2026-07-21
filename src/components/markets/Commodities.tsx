@@ -1,13 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-
-const commodities = [
-  { name: "Gold", symbol: "XAU", price: "$2,345", change: "+0.8%", isPositive: true },
-  { name: "Silver", symbol: "XAG", price: "$28.50", change: "+1.2%", isPositive: true },
-  { name: "Crude Oil", symbol: "WTI", price: "$78.20", change: "-0.5%", isPositive: false },
-  { name: "Natural Gas", symbol: "NG", price: "$2.15", change: "-1.1%", isPositive: false },
-];
+import { commodities } from "@/data/markets";
 
 export default function Commodities() {
   return (

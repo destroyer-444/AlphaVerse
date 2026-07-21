@@ -1,6 +1,8 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { navigationItems } from "@/data/navigation";
+import { APP_NAME } from "@/lib/constants";
 
 export default function Navigation() {
   return (
@@ -13,99 +15,30 @@ export default function Navigation() {
       <div className="max-w-7xl mx-auto px-6 py-3">
         <div className="flex items-center justify-between">
           <div className="text-white font-semibold text-xl tracking-tight">
-            AlphaVerse
+            {APP_NAME}
           </div>
           <div className="hidden md:flex items-center gap-8">
-            <motion.a
-              href="#"
-              className="relative text-zinc-400 hover:text-white transition-colors text-sm group"
-              whileHover={{ y: -2 }}
-              transition={{ duration: 0.2 }}
-            >
-              Markets
-              <motion.span
-                className="absolute -bottom-1 left-0 w-full h-0.5 bg-blue-500/0 group-hover:bg-blue-500/60"
-                initial={{ width: 0 }}
-                whileHover={{ width: "100%" }}
-                transition={{ duration: 0.3 }}
-              />
-              <motion.div
-                className="absolute inset-0 bg-blue-500/20 blur-xl opacity-0 group-hover:opacity-100"
-                transition={{ duration: 0.3 }}
-              />
-            </motion.a>
-            <motion.a
-              href="#"
-              className="relative text-zinc-400 hover:text-white transition-colors text-sm group"
-              whileHover={{ y: -2 }}
-              transition={{ duration: 0.2 }}
-            >
-              News
-              <motion.span
-                className="absolute -bottom-1 left-0 w-full h-0.5 bg-blue-500/0 group-hover:bg-blue-500/60"
-                initial={{ width: 0 }}
-                whileHover={{ width: "100%" }}
-                transition={{ duration: 0.3 }}
-              />
-              <motion.div
-                className="absolute inset-0 bg-blue-500/20 blur-xl opacity-0 group-hover:opacity-100"
-                transition={{ duration: 0.3 }}
-              />
-            </motion.a>
-            <motion.a
-              href="#"
-              className="relative text-zinc-400 hover:text-white transition-colors text-sm group"
-              whileHover={{ y: -2 }}
-              transition={{ duration: 0.2 }}
-            >
-              AI Insights
-              <motion.span
-                className="absolute -bottom-1 left-0 w-full h-0.5 bg-blue-500/0 group-hover:bg-blue-500/60"
-                initial={{ width: 0 }}
-                whileHover={{ width: "100%" }}
-                transition={{ duration: 0.3 }}
-              />
-              <motion.div
-                className="absolute inset-0 bg-blue-500/20 blur-xl opacity-0 group-hover:opacity-100"
-                transition={{ duration: 0.3 }}
-              />
-            </motion.a>
-            <motion.a
-              href="#"
-              className="relative text-zinc-400 hover:text-white transition-colors text-sm group"
-              whileHover={{ y: -2 }}
-              transition={{ duration: 0.2 }}
-            >
-              Future Trends
-              <motion.span
-                className="absolute -bottom-1 left-0 w-full h-0.5 bg-blue-500/0 group-hover:bg-blue-500/60"
-                initial={{ width: 0 }}
-                whileHover={{ width: "100%" }}
-                transition={{ duration: 0.3 }}
-              />
-              <motion.div
-                className="absolute inset-0 bg-blue-500/20 blur-xl opacity-0 group-hover:opacity-100"
-                transition={{ duration: 0.3 }}
-              />
-            </motion.a>
-            <motion.a
-              href="#"
-              className="relative text-zinc-400 hover:text-white transition-colors text-sm group"
-              whileHover={{ y: -2 }}
-              transition={{ duration: 0.2 }}
-            >
-              About
-              <motion.span
-                className="absolute -bottom-1 left-0 w-full h-0.5 bg-blue-500/0 group-hover:bg-blue-500/60"
-                initial={{ width: 0 }}
-                whileHover={{ width: "100%" }}
-                transition={{ duration: 0.3 }}
-              />
-              <motion.div
-                className="absolute inset-0 bg-blue-500/20 blur-xl opacity-0 group-hover:opacity-100"
-                transition={{ duration: 0.3 }}
-              />
-            </motion.a>
+            {navigationItems.map((item) => (
+              <motion.a
+                key={item.label}
+                href={item.href}
+                className="relative text-zinc-400 hover:text-white transition-colors text-sm group"
+                whileHover={{ y: -2 }}
+                transition={{ duration: 0.2 }}
+              >
+                {item.label}
+                <motion.span
+                  className="absolute -bottom-1 left-0 w-full h-0.5 bg-blue-500/0 group-hover:bg-blue-500/60"
+                  initial={{ width: 0 }}
+                  whileHover={{ width: "100%" }}
+                  transition={{ duration: 0.3 }}
+                />
+                <motion.div
+                  className="absolute inset-0 bg-blue-500/20 blur-xl opacity-0 group-hover:opacity-100"
+                  transition={{ duration: 0.3 }}
+                />
+              </motion.a>
+            ))}
           </div>
           <motion.button
             className="bg-white text-black px-5 py-2 rounded-full text-sm font-medium hover:bg-zinc-200 transition-colors"

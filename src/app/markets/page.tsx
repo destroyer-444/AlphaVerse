@@ -10,27 +10,7 @@ import Currencies from "@/components/markets/Currencies";
 import Crypto from "@/components/markets/Crypto";
 import EconomicEvents from "@/components/markets/EconomicEvents";
 import MarketHeadlines from "@/components/markets/MarketHeadlines";
-
-const regions = [
-  { name: "Global", flag: null },
-  { name: "India", flag: "🇮🇳" },
-  { name: "USA", flag: "🇺🇸" },
-  { name: "Europe", flag: "🇪🇺" },
-  { name: "China", flag: "🇨🇳" },
-  { name: "Japan", flag: "🇯🇵" },
-  { name: "Crypto", flag: null },
-];
-
-const majorIndices = [
-  { name: "NIFTY 50", flag: "🇮🇳", price: "26,120", change: "+0.72%", isPositive: true },
-  { name: "SENSEX", flag: "🇮🇳", price: "85,430", change: "+0.61%", isPositive: true },
-  { name: "NASDAQ", flag: "🇺🇸", price: "23,200", change: "-0.14%", isPositive: false },
-  { name: "S&P 500", flag: "🇺🇸", price: "6,340", change: "+0.28%", isPositive: true },
-  { name: "DAX", flag: "🇩🇪", price: "18,450", change: "+0.45%", isPositive: true },
-  { name: "FTSE", flag: "🇬🇧", price: "8,150", change: "-0.22%", isPositive: false },
-  { name: "Nikkei 225", flag: "🇯🇵", price: "41,300", change: "+0.84%", isPositive: true },
-  { name: "Hang Seng", flag: "🇭🇰", price: "24,510", change: "-0.42%", isPositive: false },
-];
+import { regions, majorIndices } from "@/data/markets";
 
 export default function MarketsPage() {
   return (

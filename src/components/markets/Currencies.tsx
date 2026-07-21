@@ -1,13 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-
-const currencies = [
-  { name: "USD/INR", price: "83.45", change: "+0.1%", isPositive: true },
-  { name: "EUR/USD", price: "1.085", change: "-0.2%", isPositive: false },
-  { name: "GBP/USD", price: "1.265", change: "+0.3%", isPositive: true },
-  { name: "USD/JPY", price: "154.20", change: "+0.5%", isPositive: true },
-];
+import { currencies } from "@/data/markets";
 
 export default function Currencies() {
   return (

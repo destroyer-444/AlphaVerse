@@ -1,20 +1,12 @@
 "use client";
 
 import { motion } from "framer-motion";
-
-const regions = [
-  { name: "Global", flag: null },
-  { name: "India", flag: "🇮🇳" },
-  { name: "USA", flag: "🇺🇸" },
-  { name: "Europe", flag: "🇪🇺" },
-  { name: "Japan", flag: "🇯🇵" },
-  { name: "China", flag: "🇨🇳" },
-];
+import { regions } from "@/data/markets";
 
 export default function RegionSelector() {
   return (
     <div className="flex flex-wrap gap-2 justify-center mb-8">
-      {regions.map((region, index) => (
+      {regions.slice(0, 6).map((region, index) => (
         <motion.button
           key={region.name}
           initial={{ opacity: 0, y: 10 }}
