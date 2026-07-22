@@ -4,9 +4,10 @@ import { motion } from "framer-motion";
 import FeaturedArticle from "./FeaturedArticle";
 import NewsCard from "./NewsCard";
 import FilterBar from "./FilterBar";
-import { aiNewsItems } from "@/data/news";
+import { newsService } from "@/services/newsService";
 
 export default function AINewsIntelligence() {
+  const aiNewsItems = newsService.getAINewsItems();
   return (
     <section className="relative z-10 py-24 px-6">
       <div className="max-w-7xl mx-auto">

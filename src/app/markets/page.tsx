@@ -10,9 +10,11 @@ import Currencies from "@/components/markets/Currencies";
 import Crypto from "@/components/markets/Crypto";
 import EconomicEvents from "@/components/markets/EconomicEvents";
 import MarketHeadlines from "@/components/markets/MarketHeadlines";
-import { regions, majorIndices } from "@/data/markets";
+import { useMarketData } from "@/hooks/useMarketData";
 
 export default function MarketsPage() {
+  const regions = useMarketData("regions") ?? [];
+  const majorIndices = useMarketData("majorIndices") ?? [];
   return (
     <PageLayout>
       <div className="px-6 py-12">

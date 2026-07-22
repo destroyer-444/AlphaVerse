@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { getCompany } from "@/data/company";
+import { companyService } from "@/services/companyService";
 import CompanyHeader from "@/components/company/CompanyHeader";
 import CompanyOverview from "@/components/company/CompanyOverview";
 import CompanyStatCard from "@/components/company/CompanyStatCard";
@@ -9,7 +9,7 @@ import Competitors from "@/components/company/Competitors";
 import { CompanyMetric } from "@/types/company";
 
 export default function CompanyPage({ params }: { params: { symbol: string } }) {
-  const company = getCompany(params.symbol);
+  const company = companyService.getCompany(params.symbol);
 
   if (!company) {
     return (

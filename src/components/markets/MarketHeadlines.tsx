@@ -1,9 +1,10 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { marketHeadlines } from "@/data/markets";
+import { useMarketData } from "@/hooks/useMarketData";
 
 export default function MarketHeadlines() {
+  const marketHeadlines = useMarketData("marketHeadlines") ?? [];
   return (
     <div className="bg-white/[0.03] backdrop-blur-xl border border-white/10 rounded-2xl p-6">
       <h3 className="text-xl font-bold text-white mb-4">Latest Market Headlines</h3>

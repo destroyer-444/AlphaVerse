@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { mostRead } from "@/data/news";
+import { newsService } from "@/services/newsService";
 
 const nameToSymbol: Record<string, string> = {
   "NVIDIA": "NVDA",
@@ -29,6 +29,7 @@ function linkCompanyNames(text: string): React.ReactNode {
 }
 
 export default function MostRead() {
+  const mostRead = newsService.getMostRead();
   return (
     <div className="bg-white/[0.03] backdrop-blur-xl border border-white/10 rounded-2xl p-6">
       <h3 className="text-xl font-bold text-white mb-4">Most Read</h3>

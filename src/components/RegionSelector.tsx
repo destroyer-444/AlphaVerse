@@ -1,9 +1,10 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { regions } from "@/data/markets";
+import { useMarketData } from "@/hooks/useMarketData";
 
 export default function RegionSelector() {
+  const regions = useMarketData("regions") ?? [];
   return (
     <div className="flex flex-wrap gap-2 justify-center mb-8">
       {regions.slice(0, 6).map((region, index) => (

@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
+import { useMarketData } from "@/hooks/useMarketData";
 
 const nameToSymbol: Record<string, string> = {
   "NVIDIA": "NVDA",
@@ -13,17 +14,8 @@ const nameToSymbol: Record<string, string> = {
 };
 
 export default function TopGainersLosers() {
-  const gainers = [
-    { name: "NVIDIA", change: "+3.2%", price: "$1,245" },
-    { name: "TSMC", change: "+2.8%", price: "$185" },
-    { name: "ASML", change: "+2.5%", price: "$1,020" },
-  ];
-
-  const losers = [
-    { name: "Intel", change: "-2.1%", price: "$32" },
-    { name: "Boeing", change: "-1.8%", price: "$178" },
-    { name: "Nike", change: "-1.5%", price: "$95" },
-  ];
+  const topGainers = useMarketData("topGainers") ?? [];
+  const topLosers = useMarketData("topLosers") ?? [];
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -39,7 +31,7 @@ export default function TopGainersLosers() {
           Top Gainers
         </h3>
         <div className="space-y-3">
-          {gainers.map((stock, index) => (
+          {topGainers.map((stock, index) => (
             <motion.div
               key={stock.name}
               initial={{ opacity: 0, y: 10 }}
@@ -75,7 +67,7 @@ export default function TopGainersLosers() {
           Top Losers
         </h3>
         <div className="space-y-3">
-          {losers.map((stock, index) => (
+          {topLosers.map((stock, index) => (
             <motion.div
               key={stock.name}
               initial={{ opacity: 0, y: 10 }}

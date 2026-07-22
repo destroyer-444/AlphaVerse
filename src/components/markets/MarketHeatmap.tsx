@@ -1,9 +1,10 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { heatmapSectors } from "@/data/markets";
+import { useMarketData } from "@/hooks/useMarketData";
 
 export default function MarketHeatmap() {
+  const heatmapSectors = useMarketData("heatmapSectors") ?? [];
   return (
     <div className="bg-white/[0.03] backdrop-blur-xl border border-white/10 rounded-2xl p-6">
       <h3 className="text-xl font-bold text-white mb-4">Market Heatmap</h3>

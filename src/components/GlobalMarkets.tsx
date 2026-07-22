@@ -5,9 +5,10 @@ import MarketCard from "./MarketCard";
 import RegionSelector from "./RegionSelector";
 import SearchBar from "./SearchBar";
 import MarketSummary from "./MarketSummary";
-import { majorIndices } from "@/data/markets";
+import { useMarketData } from "@/hooks/useMarketData";
 
 export default function GlobalMarkets() {
+  const majorIndices = useMarketData("majorIndices") ?? [];
   return (
     <section className="relative z-10 py-24 px-6">
       <div className="max-w-7xl mx-auto">

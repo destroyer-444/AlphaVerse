@@ -1,9 +1,10 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { featuredStory } from "@/data/news";
+import { newsService } from "@/services/newsService";
 
 export default function FeaturedStory() {
+  const featuredStory = newsService.getFeaturedStory();
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}

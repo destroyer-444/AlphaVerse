@@ -1,9 +1,10 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { crypto } from "@/data/markets";
+import { useMarketData } from "@/hooks/useMarketData";
 
 export default function Crypto() {
+  const crypto = useMarketData("crypto") ?? [];
   return (
     <div className="bg-white/[0.03] backdrop-blur-xl border border-white/10 rounded-2xl p-6">
       <h3 className="text-xl font-bold text-white mb-4">Crypto</h3>

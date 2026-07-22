@@ -1,9 +1,10 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { newsCategories } from "@/data/news";
+import { newsService } from "@/services/newsService";
 
 export default function NewsFilterBar() {
+  const newsCategories = newsService.getNewsCategories();
   return (
     <div className="space-y-6">
       {/* Search */}

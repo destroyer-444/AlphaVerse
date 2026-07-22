@@ -1,9 +1,10 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { marketSummary } from "@/data/markets";
+import { useMarketData } from "@/hooks/useMarketData";
 
 export default function MarketSummary() {
+  const marketSummary = useMarketData("marketSummary") ?? [];
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}

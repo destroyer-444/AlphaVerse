@@ -1,9 +1,10 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { marketBrief } from "@/data/news";
+import { newsService } from "@/services/newsService";
 
 export default function MarketBrief() {
+  const marketBrief = newsService.getMarketBrief();
   const colorStyles = {
     green: "bg-green-500/20 border-green-500/30",
     red: "bg-red-500/20 border-red-500/30",

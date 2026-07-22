@@ -9,9 +9,10 @@ import TrendingTopics from "@/components/news/TrendingTopics";
 import MostRead from "@/components/news/MostRead";
 import NewsletterCard from "@/components/news/NewsletterCard";
 import MarketBrief from "@/components/news/MarketBrief";
-import { latestNews } from "@/data/news";
+import { newsService } from "@/services/newsService";
 
 export default function NewsPage() {
+  const latestNews = newsService.getLatestNews();
   return (
     <PageLayout>
       <div className="px-6 py-12">

@@ -1,9 +1,10 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { trendingTopics } from "@/data/news";
+import { newsService } from "@/services/newsService";
 
 export default function TrendingTopics() {
+  const trendingTopics = newsService.getTrendingTopics();
   return (
     <div className="bg-white/[0.03] backdrop-blur-xl border border-white/10 rounded-2xl p-6">
       <h3 className="text-xl font-bold text-white mb-4">Trending Topics</h3>
