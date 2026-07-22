@@ -32,25 +32,23 @@ export default function TopGainersLosers() {
         </h3>
         <div className="space-y-3">
           {topGainers.map((stock, index) => (
-            <motion.div
-              key={stock.name}
-              initial={{ opacity: 0, y: 10 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.3, delay: index * 0.1 }}
-              className="flex items-center justify-between p-3 bg-white/5 rounded-xl hover:bg-white/10 transition-colors"
-            >
-              <div>
-                <Link
-                  href={`/companies/${nameToSymbol[stock.name]}`}
-                  className="text-white font-medium hover:text-blue-400 hover:underline transition-colors"
-                >
+            <Link key={stock.name} href={`/companies/${nameToSymbol[stock.name]}`} className="block">
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.3, delay: index * 0.1 }}
+                className="flex items-center justify-between p-3 bg-white/5 rounded-xl hover:bg-white/10 transition-colors"
+              >
+                <div>
+                  <span className="text-white font-medium hover:text-blue-400 hover:underline transition-colors">
                   {stock.name}
-                </Link>
-                <p className="text-zinc-400 text-sm">{stock.price}</p>
-              </div>
-              <span className="text-green-400 font-semibold">{stock.change}</span>
-            </motion.div>
+                  </span>
+                  <p className="text-zinc-400 text-sm">{stock.price}</p>
+                </div>
+                <span className="text-green-400 font-semibold">{stock.change}</span>
+              </motion.div>
+            </Link>
           ))}
         </div>
       </motion.div>
@@ -68,25 +66,23 @@ export default function TopGainersLosers() {
         </h3>
         <div className="space-y-3">
           {topLosers.map((stock, index) => (
-            <motion.div
-              key={stock.name}
-              initial={{ opacity: 0, y: 10 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.3, delay: index * 0.1 }}
-              className="flex items-center justify-between p-3 bg-white/5 rounded-xl hover:bg-white/10 transition-colors"
-            >
-              <div>
-                <Link
-                  href={`/companies/${nameToSymbol[stock.name]}`}
-                  className="text-white font-medium hover:text-blue-400 hover:underline transition-colors"
-                >
+            <Link key={stock.name} href={`/companies/${nameToSymbol[stock.name]}`} className="block">
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.3, delay: index * 0.1 }}
+                className="flex items-center justify-between p-3 bg-white/5 rounded-xl hover:bg-white/10 transition-colors"
+              >
+                <div>
+                  <span className="text-white font-medium hover:text-blue-400 hover:underline transition-colors">
                   {stock.name}
-                </Link>
-                <p className="text-zinc-400 text-sm">{stock.price}</p>
-              </div>
-              <span className="text-red-400 font-semibold">{stock.change}</span>
-            </motion.div>
+                  </span>
+                  <p className="text-zinc-400 text-sm">{stock.price}</p>
+                </div>
+                <span className="text-red-400 font-semibold">{stock.change}</span>
+              </motion.div>
+            </Link>
           ))}
         </div>
       </motion.div>

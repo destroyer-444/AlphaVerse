@@ -8,8 +8,13 @@ import SectionHeader from "@/components/company/SectionHeader";
 import Competitors from "@/components/company/Competitors";
 import { CompanyMetric } from "@/types/company";
 
-export default function CompanyPage({ params }: { params: { symbol: string } }) {
-  const company = companyService.getCompany(params.symbol);
+export default async function CompanyPage({
+  params,
+}: {
+  params: Promise<{ symbol: string }>;
+}) {
+  const { symbol } = await params;
+  const company = companyService.getCompany(symbol);
 
   if (!company) {
     return (
@@ -17,7 +22,7 @@ export default function CompanyPage({ params }: { params: { symbol: string } }) 
         <div className="text-center">
           <h1 className="text-4xl font-bold text-white mb-4">Company Not Found</h1>
           <p className="text-zinc-400 mb-8">
-            The company with symbol "{params.symbol}" does not exist in our database.
+            The company with symbol "{symbol}" does not exist in our database.
           </p>
           <Link
             href="/markets"
