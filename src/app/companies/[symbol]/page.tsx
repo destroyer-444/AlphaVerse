@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { companyService } from "@/services/companyService";
+import { getLiveCompany } from "@/services/companyLiveService";
 import CompanyHeader from "@/components/company/CompanyHeader";
 import CompanyOverview from "@/components/company/CompanyOverview";
 import CompanyStatCard from "@/components/company/CompanyStatCard";
@@ -14,7 +14,7 @@ export default async function CompanyPage({
   params: Promise<{ symbol: string }>;
 }) {
   const { symbol } = await params;
-  const company = companyService.getCompany(symbol);
+  const company = await getLiveCompany(symbol);
 
   if (!company) {
     return (
