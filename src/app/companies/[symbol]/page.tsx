@@ -40,6 +40,25 @@ export default async function CompanyPage({
     { label: "Sector", value: company.sector },
     { label: "Industry", value: company.industry },
   ];
+  const intelligence = {
+    outlook: "Bullish",
+    confidence: 78,
+    reasons: [
+      "Strong demand continues across core markets.",
+      "Earnings momentum remains supportive.",
+      "Industry positioning supports long-term growth.",
+    ],
+    risks: [
+      "Valuation may be sensitive to near-term expectations.",
+      "Competitive pressure could affect future margins.",
+      "Market volatility may impact short-term performance.",
+    ],
+    watchNext: [
+      "Next earnings release and forward guidance.",
+      "Updates to sector demand and spending trends.",
+      "New product and partnership announcements.",
+    ],
+  };
 
   return (
     <div className="min-h-screen bg-black">
@@ -79,6 +98,47 @@ export default async function CompanyPage({
 
           {/* Company Overview */}
           <CompanyOverview company={company} />
+
+          {/* AlphaVerse Intelligence */}
+          <section className="mt-8">
+            <SectionHeader title="AlphaVerse Intelligence" subtitle="Placeholder signals and themes for this company." />
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+              <div className="bg-white/[0.03] backdrop-blur-xl border border-white/10 rounded-2xl p-6">
+                <p className="text-sm text-zinc-400 mb-3">Market Outlook</p>
+                <span className="inline-flex items-center px-3 py-1.5 rounded-full bg-green-500/15 text-green-400 text-sm font-semibold border border-green-500/20">
+                  {intelligence.outlook}
+                </span>
+              </div>
+              <div className="bg-white/[0.03] backdrop-blur-xl border border-white/10 rounded-2xl p-6">
+                <div className="flex items-center justify-between gap-4 mb-3">
+                  <p className="text-sm text-zinc-400">Confidence</p>
+                  <p className="text-white font-semibold">{intelligence.confidence}%</p>
+                </div>
+                <div className="h-2 rounded-full bg-white/10 overflow-hidden">
+                  <div className="h-full rounded-full bg-gradient-to-r from-blue-500 to-purple-500" style={{ width: `${intelligence.confidence}%` }} />
+                </div>
+              </div>
+            </div>
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+              {[
+                { title: "Why?", items: intelligence.reasons, marker: "bg-blue-400" },
+                { title: "Risks", items: intelligence.risks, marker: "bg-red-400" },
+                { title: "Watch Next", items: intelligence.watchNext, marker: "bg-purple-400" },
+              ].map((card) => (
+                <div key={card.title} className="bg-white/[0.03] backdrop-blur-xl border border-white/10 rounded-2xl p-6">
+                  <h3 className="text-lg font-bold text-white mb-4">{card.title}</h3>
+                  <ul className="space-y-3">
+                    {card.items.map((item) => (
+                      <li key={item} className="flex gap-3 text-sm text-zinc-300 leading-relaxed">
+                        <span className={`w-1.5 h-1.5 rounded-full shrink-0 mt-1.5 ${card.marker}`} />
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
+          </section>
 
           {/* Competitors */}
           <div className="mt-8">
