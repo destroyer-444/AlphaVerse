@@ -42,7 +42,15 @@ export default async function CompanyPage({
   ];
   const intelligence = {
     outlook: "Bullish",
-    confidence: 78,
+    overallScore: 84,
+    scoreExplanation: "Strong overall fundamentals with moderate valuation risk.",
+    scores: [
+      { label: "Growth", value: 91 },
+      { label: "Momentum", value: 88 },
+      { label: "Financial Health", value: 82 },
+      { label: "Risk", value: 43 },
+      { label: "Valuation", value: 62 },
+    ],
     reasons: [
       "Strong demand continues across core markets.",
       "Earnings momentum remains supportive.",
@@ -58,6 +66,11 @@ export default async function CompanyPage({
       "Updates to sector demand and spending trends.",
       "New product and partnership announcements.",
     ],
+  };
+  const scoreColor = (score: number) => {
+    if (score >= 75) return "bg-green-400";
+    if (score >= 55) return "bg-yellow-400";
+    return "bg-red-400";
   };
 
   return (
@@ -110,14 +123,31 @@ export default async function CompanyPage({
                 </span>
               </div>
               <div className="bg-white/[0.03] backdrop-blur-xl border border-white/10 rounded-2xl p-6">
-                <div className="flex items-center justify-between gap-4 mb-3">
-                  <p className="text-sm text-zinc-400">Confidence</p>
-                  <p className="text-white font-semibold">{intelligence.confidence}%</p>
+                <div className="flex items-end justify-between gap-4 mb-3">
+                  <div>
+                    <p className="text-sm text-zinc-400 mb-1">AlphaVerse Score</p>
+                    <p className="text-2xl font-bold text-white">{intelligence.overallScore} <span className="text-base text-zinc-400">/ 100</span></p>
+                  </div>
+                  <span className="text-sm font-semibold text-green-400">Strong</span>
                 </div>
-                <div className="h-2 rounded-full bg-white/10 overflow-hidden">
-                  <div className="h-full rounded-full bg-gradient-to-r from-blue-500 to-purple-500" style={{ width: `${intelligence.confidence}%` }} />
+                <div className="h-2 rounded-full bg-white/10 overflow-hidden mb-3">
+                  <div className="h-full rounded-full bg-gradient-to-r from-red-400 via-yellow-400 to-green-400" style={{ width: `${intelligence.overallScore}%` }} />
                 </div>
+                <p className="text-sm text-zinc-400">{intelligence.scoreExplanation}</p>
               </div>
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 mb-6">
+              {intelligence.scores.map((score) => (
+                <div key={score.label} className="bg-white/[0.03] backdrop-blur-xl border border-white/10 rounded-2xl p-5">
+                  <div className="flex items-center justify-between gap-3 mb-3">
+                    <p className="text-sm text-zinc-400">{score.label}</p>
+                    <p className="text-lg font-bold text-white">{score.value}</p>
+                  </div>
+                  <div className="h-1.5 rounded-full bg-white/10 overflow-hidden">
+                    <div className={`h-full rounded-full ${scoreColor(score.value)}`} style={{ width: `${score.value}%` }} />
+                  </div>
+                </div>
+              ))}
             </div>
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
               {[
