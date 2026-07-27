@@ -63,3 +63,32 @@ export interface MarketHeadline {
   title: string;
   time: string;
 }
+
+export type MarketSentiment = "Bullish" | "Neutral" | "Bearish";
+
+export interface WatchNextEvent {
+  title: string;
+  date: string;
+  category: "Fed" | "CPI" | "PPI" | "Jobs" | "GDP" | "Earnings" | "OPEC" | "FOMC" | "ECB" | "BoJ" | "Macro";
+  description: string;
+  impact: "High" | "Medium" | "Low";
+}
+
+export interface MarketIntelligenceData {
+  overallScore: number;
+  sentiment: MarketSentiment;
+  confidence: number;
+  summaryText: string;
+  drivers: string[];
+  watchNext: WatchNextEvent[];
+  snapshot: {
+    indexes: MarketCard[];
+    crypto: CryptoAsset[];
+    commodities: Commodity[];
+    currencies: Currency[];
+  };
+  sectorHeat: HeatmapSector[];
+  topGainers: MarketStock[];
+  topLosers: MarketStock[];
+  economicCalendar: EconomicEvent[];
+}

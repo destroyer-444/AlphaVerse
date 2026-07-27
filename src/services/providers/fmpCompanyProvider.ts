@@ -71,16 +71,16 @@ export class FmpCompanyProvider implements ICompanyDataProvider {
       fetch(`${this.baseUrl}/quote?symbol=${encodedSymbol}&apikey=${encodedApiKey}`, { cache: "no-store" }),
     ]);
 
-    if (!profileResponse.ok || !quoteResponse.ok) return undefined;
+    if (!quoteResponse.ok) return undefined;
 
     const [profiles, quotes] = await Promise.all([
-      profileResponse.json() as Promise<FmpProfile[]>,
+      profileResponse.ok ? (profileResponse.json() as Promise<FmpProfile[]>) : Promise.resolve([]),
       quoteResponse.json() as Promise<FmpQuote[]>,
     ]);
-    const profile = profiles[0];
+    const profile = profiles[0] || {};
     const quote = quotes[0];
 
-    if (!profile || !quote) return undefined;
+    if (!quote) return undefined;
 
     const percentChange = quote.changesPercentage ?? quote.changePercentage;
     const employeeCount = Number(profile.fullTimeEmployees);
@@ -102,6 +102,51 @@ export class FmpCompanyProvider implements ICompanyDataProvider {
       employees: Number.isFinite(employeeCount) ? formatNumber(employeeCount) : fallback.employees,
       headquarters: formatHeadquarters(profile, fallback.headquarters),
     };
+  }
+
+  async getFinancialData(symbol: string): Promise<any> {
+    const apiKey = process.env.FMP_API_KEY;
+    if (!apiKey) return undefined;
+
+    const encodedSymbol = encodeURIComponent(symbol.toUpperCase());
+    const encodedApiKey = encodeURIComponent(apiKey);
+
+    try {
+      const [ratiosRes, metricsRes, growthRes, quoteRes, profileRes, ratiosTtmRes, metricsTtmRes] = await Promise.all([
+        fetch(`${this.baseUrl}/ratios?symbol=${encodedSymbol}&apikey=${encodedApiKey}`, { cache: "no-store" }),
+        fetch(`${this.baseUrl}/key-metrics?symbol=${encodedSymbol}&apikey=${encodedApiKey}`, { cache: "no-store" }),
+        fetch(`${this.baseUrl}/financial-growth?symbol=${encodedSymbol}&apikey=${encodedApiKey}`, { cache: "no-store" }),
+        fetch(`${this.baseUrl}/quote?symbol=${encodedSymbol}&apikey=${encodedApiKey}`, { cache: "no-store" }),
+        fetch(`${this.baseUrl}/profile?symbol=${encodedSymbol}&apikey=${encodedApiKey}`, { cache: "no-store" }),
+        fetch(`${this.baseUrl}/ratios-ttm?symbol=${encodedSymbol}&apikey=${encodedApiKey}`, { cache: "no-store" }),
+        fetch(`${this.baseUrl}/key-metrics-ttm?symbol=${encodedSymbol}&apikey=${encodedApiKey}`, { cache: "no-store" }),
+      ]);
+
+      const [ratios, metrics, growth, quote, profile, ratiosTtm, metricsTtm] = await Promise.all([
+        ratiosRes.ok ? ratiosRes.json() : Promise.resolve([]),
+        metricsRes.ok ? metricsRes.json() : Promise.resolve([]),
+        growthRes.ok ? growthRes.json() : Promise.resolve([]),
+        quoteRes.ok ? quoteRes.json() : Promise.resolve([]),
+        profileRes.ok ? profileRes.json() : Promise.resolve([]),
+        ratiosTtmRes.ok ? ratiosTtmRes.json() : Promise.resolve([]),
+        metricsTtmRes.ok ? metricsTtmRes.json() : Promise.resolve([]),
+      ]);
+
+      const ratiosObj = Array.isArray(ratios) ? ratios[0] || {} : ratios || {};
+      const ratiosTtmObj = Array.isArray(ratiosTtm) ? ratiosTtm[0] || {} : ratiosTtm || {};
+      const metricsObj = Array.isArray(metrics) ? metrics[0] || {} : metrics || {};
+      const metricsTtmObj = Array.isArray(metricsTtm) ? metricsTtm[0] || {} : metricsTtm || {};
+
+      return {
+        ratios: { ...ratiosTtmObj, ...ratiosObj },
+        metrics: { ...metricsTtmObj, ...metricsObj },
+        growth: Array.isArray(growth) ? growth[0] : growth,
+        quote: Array.isArray(quote) ? quote[0] : quote,
+        profile: Array.isArray(profile) ? profile[0] : profile,
+      };
+    } catch {
+      return undefined;
+    }
   }
 }
 

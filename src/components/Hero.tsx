@@ -69,12 +69,22 @@ export default function Hero() {
         transition={{ duration: 0.8, delay: 0.8, ease: "easeOut" }}
         className="relative z-10 mt-12 flex flex-col sm:flex-row gap-4"
       >
-        <button className="bg-white text-black px-8 py-4 rounded-full text-base font-medium hover:bg-zinc-200 transition-colors">
+        <motion.button
+          className="bg-white text-black px-8 py-4 rounded-full text-base font-medium hover:bg-zinc-200 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50 focus-visible:ring-offset-2 focus-visible:ring-offset-black"
+          whileHover={{ scale: 1.04, y: -1 }}
+          whileTap={{ scale: 0.97 }}
+          transition={{ duration: 0.18 }}
+        >
           Get Started
-        </button>
-        <button className="bg-white/10 text-white px-8 py-4 rounded-full text-base font-medium hover:bg-white/20 transition-colors border border-white/20">
+        </motion.button>
+        <motion.button
+          className="bg-white/10 text-white px-8 py-4 rounded-full text-base font-medium hover:bg-white/20 transition-colors border border-white/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400"
+          whileHover={{ scale: 1.04, y: -1 }}
+          whileTap={{ scale: 0.97 }}
+          transition={{ duration: 0.18 }}
+        >
           Explore Markets
-        </button>
+        </motion.button>
       </motion.div>
       
       {/* Trust text */}
