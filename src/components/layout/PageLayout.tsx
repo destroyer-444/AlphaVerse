@@ -1,6 +1,8 @@
 import { ReactNode } from "react";
 import Background from "@/components/Background";
 import Navigation from "@/components/Navigation";
+import PageTransition from "@/components/layout/PageTransition";
+import ApiMetricsDebugPanel from "@/components/common/ApiMetricsDebugPanel";
 
 interface PageLayoutProps {
   children: ReactNode;
@@ -12,8 +14,9 @@ export default function PageLayout({ children }: PageLayoutProps) {
       <Background />
       <Navigation />
       <div className="relative z-10 pt-24">
-        {children}
+        <PageTransition>{children}</PageTransition>
       </div>
+      <ApiMetricsDebugPanel />
     </div>
   );
 }

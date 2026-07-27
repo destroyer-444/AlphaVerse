@@ -5,6 +5,11 @@ import { companyService } from "./companyService";
 import { newsService } from "./newsService";
 import { marketService } from "./marketService";
 
+// Re-export the new universal search for consumers who import from here
+export { universalSearchService } from "./universalSearchService";
+export type { UniversalSearchResult, UniversalSearchResponse } from "@/types/search";
+
+/** @deprecated Use universalSearchService instead */
 export interface SearchResult {
   type: "company" | "news" | "market";
   id: string;
