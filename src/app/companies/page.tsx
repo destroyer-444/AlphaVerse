@@ -1,5 +1,7 @@
 import Link from "next/link";
 import PageLayout from "@/components/layout/PageLayout";
+import PageHero from "@/components/common/PageHero";
+import RegionSelector from "@/components/RegionSelector";
 import { companyService } from "@/services/companyService";
 import { Company } from "@/types/company";
 
@@ -95,17 +97,27 @@ export default function CompaniesPage() {
 
   return (
     <PageLayout>
-      <main className="px-6 py-12">
+      <main className="px-6 py-8">
         <div className="max-w-7xl mx-auto">
+          {/* Page Hero Introduction Banner */}
+          <PageHero
+            title="Global Companies Directory"
+            category="Equities Intelligence"
+            summary="Analyze fundamental financials, AI consensus ratings, and institutional price action for market-leading corporations."
+            whyItMatters="Individual equities exhibit unique operating leverage and catalyst sensitivity that broader sector indices obscure."
+            howToUse={[
+              "Select a region pill to filter directory equites across international exchanges.",
+              "Use the global search bar to locate specific tickers by symbol or industry keyword.",
+              "Click any company card to inspect financial statements, AI bull/bear cases, and real-time news catalysts.",
+            ]}
+            proTip="Look for companies combining high AI model confidence scores with low institutional crowding."
+          />
+
+          {/* Upgraded Region Workspace Selector */}
+          <RegionSelector />
+
           <section className="mb-12">
-            <p className="text-blue-400 text-sm font-semibold tracking-[0.2em] uppercase mb-4">Markets directory</p>
-            <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-8">
-              <div className="max-w-2xl">
-                <h1 className="text-4xl md:text-5xl font-bold text-white tracking-tight mb-4">Explore Companies</h1>
-                <p className="text-lg text-zinc-400">
-                  Follow market leaders and discover companies across global industries.
-                </p>
-              </div>
+            <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6">
               <div className="w-full lg:max-w-md relative">
                 <svg className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-zinc-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="m21 21-4.35-4.35m1.35-5.65a7 7 0 1 1-14 0 7 7 0 0 1 14 0Z" />

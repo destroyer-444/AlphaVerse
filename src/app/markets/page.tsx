@@ -2,6 +2,8 @@
 
 import { motion } from "framer-motion";
 import PageLayout from "@/components/layout/PageLayout";
+import PageHero from "@/components/common/PageHero";
+import RegionSelector from "@/components/RegionSelector";
 import MajorIndicesCard from "@/components/markets/MajorIndicesCard";
 import MarketHeatmap from "@/components/markets/MarketHeatmap";
 import TopGainersLosers from "@/components/markets/TopGainersLosers";
@@ -13,49 +15,27 @@ import MarketHeadlines from "@/components/markets/MarketHeadlines";
 import { useMarketData } from "@/hooks/useMarketData";
 
 export default function MarketsPage() {
-  const regions = useMarketData("regions") ?? [];
   const majorIndices = useMarketData("majorIndices") ?? [];
   return (
     <PageLayout>
-      <div className="px-6 py-12">
+      <div className="px-6 py-8">
         <div className="max-w-7xl mx-auto">
-          {/* Page Header */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="mb-8"
-          >
-            <h1 className="text-4xl md:text-5xl font-bold text-white tracking-tight mb-4">
-              Markets
-            </h1>
-            <p className="text-lg text-zinc-400">
-              Global financial markets in one place.
-            </p>
-          </motion.div>
+          {/* Page Hero Introduction Banner */}
+          <PageHero
+            title="Global Markets & Asset Classes"
+            category="Live Institutional Workspace"
+            summary="Monitor real-time price action across equities, commodities, forex, and cryptocurrency."
+            whyItMatters="Cross-asset price signals reveal macro rotation trends before individual equity earnings reports capture them."
+            howToUse={[
+              "Select a region pill below to activate a region-focused workspace with localized trading hours and sentiment.",
+              "Use the interactive heatmap to identify overextended sector valuations.",
+              "Track economic event countdowns on the right sidebar for volatility catalysts.",
+            ]}
+            proTip="Notice how currency movements in USD/JPY directly impact Japanese semiconductor equity valuations."
+          />
 
-          {/* Region Selector */}
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            className="flex flex-wrap gap-2 mb-8"
-          >
-            {regions.map((region, index) => (
-              <motion.button
-                key={region.name}
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.3, delay: index * 0.05 }}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-white text-sm hover:bg-white/10 hover:border-white/20 transition-all"
-              >
-                {region.flag && <span className="text-base">{region.flag}</span>}
-                <span>{region.name}</span>
-              </motion.button>
-            ))}
-          </motion.div>
+          {/* Upgraded 9-Region Workspace Selector */}
+          <RegionSelector />
 
           {/* Search Bar */}
           <motion.div

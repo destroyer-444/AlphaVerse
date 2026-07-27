@@ -10,6 +10,7 @@
 
 import { useState } from "react";
 import { Portfolio } from "@/types/portfolio";
+import PageHero from "@/components/common/PageHero";
 
 interface PortfolioDashboardProps {
   portfolio: Portfolio;
@@ -60,26 +61,31 @@ export default function PortfolioDashboard({ portfolio }: PortfolioDashboardProp
   }
 
   return (
-    <div className="min-h-screen px-4 sm:px-6 pb-24">
+    <div className="min-h-screen px-4 sm:px-6 pb-24 pt-6">
       <div className="max-w-7xl mx-auto">
-        {/* Page Header & Workspace Meta */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
-          <div>
-            <div className="flex items-center gap-2 mb-1.5">
-              <span className="text-xl" aria-hidden="true">💎</span>
-              <span className="text-xs font-bold uppercase tracking-widest text-blue-400">
-                Live Intelligence Workspace
-              </span>
-              <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-white/10 text-zinc-300 border border-white/15">
-                PRO ACTIVE
-              </span>
-            </div>
-            <h1 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
-              {portfolio.name}
-            </h1>
-            <p className="text-zinc-400 text-sm mt-1">
-              Synchronized multi-asset evaluation powered by 6 deterministic AI engines and EDGAR institutional feeds.
-            </p>
+        {/* Page Hero Introduction Banner */}
+        <PageHero
+          title={portfolio.name}
+          category="Personalized Portfolio Workspace"
+          summary="Synchronized multi-asset evaluation powered by 6 deterministic AI engines and EDGAR institutional feeds."
+          whyItMatters="Unseen concentration risks in cloud computing or semiconductor supply chains can expose your equity holdings to sudden macro drawdowns."
+          howToUse={[
+            "Switch between the tabs below to inspect Holdings, Health Score diagnostics, Risk shields, and AI Opportunities.",
+            "Review the allocation breakdown by Sector, Country, or Asset Class to ensure institutional diversification.",
+            "Monitor the AI Decision Consensus (Strong Buy / Accumulate / Reduce) for actionable rebalancing signals.",
+          ]}
+          proTip="Aim to keep your Portfolio Health Score above 80/100 to maximize risk-adjusted Sharpe ratios."
+        />
+
+        {/* Workspace Meta & Decision Summary Pills */}
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-6">
+          <div className="flex items-center gap-2">
+            <span className="text-xs font-bold uppercase tracking-widest text-blue-400">
+              ⚡ Real-Time Engine Evaluation
+            </span>
+            <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-white/10 text-zinc-300 border border-white/15">
+              PRO ACTIVE
+            </span>
           </div>
 
           {/* Decision Summary Pills */}

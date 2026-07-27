@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import PageLayout from "@/components/layout/PageLayout";
+import PageHero from "@/components/common/PageHero";
 import NewsFilterBar from "@/components/news/NewsFilterBar";
 import FeaturedStory from "@/components/news/FeaturedStory";
 import NewsCard from "@/components/news/NewsCard";
@@ -15,22 +16,21 @@ export default function NewsPage() {
   const latestNews = newsService.getLatestNews();
   return (
     <PageLayout>
-      <div className="px-6 py-12">
+      <div className="px-6 py-8">
         <div className="max-w-7xl mx-auto">
-          {/* Page Header */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="mb-8"
-          >
-            <h1 className="text-4xl md:text-5xl font-bold text-white tracking-tight mb-4">
-              Financial News
-            </h1>
-            <p className="text-lg text-zinc-400">
-              Stay ahead with AI-curated global financial news.
-            </p>
-          </motion.div>
+          {/* Page Hero Introduction Banner */}
+          <PageHero
+            title="AI-Synthesized Global News"
+            category="Live Catalyst Feed"
+            summary="Continuous algorithmic extraction of earnings surprises, macro announcements, and institutional price drivers."
+            whyItMatters="Traditional news feeds overwhelm traders with noise; our NLP models isolate the exact catalyst sentences moving equity valuations."
+            howToUse={[
+              "Use the category filter pills below to focus on specific asset sectors or macro topics.",
+              "Review the Featured Story for the highest-impact market event of the session.",
+              "Scan the right sidebar for trending keywords and real-time market briefs.",
+            ]}
+            proTip="Notice how headline sentiment scores directly correlate with pre-market volume spikes."
+          />
 
           {/* Filter Bar */}
           <NewsFilterBar />

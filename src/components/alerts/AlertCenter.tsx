@@ -10,6 +10,7 @@
 
 import { useState, useMemo } from "react";
 import { AlertCenterData, AlertSeverity, AlertCategory } from "@/types/alerts";
+import PageHero from "@/components/common/PageHero";
 
 interface AlertCenterProps {
   initialData: AlertCenterData;
@@ -71,30 +72,25 @@ export default function AlertCenter({ initialData }: AlertCenterProps) {
   };
 
   return (
-    <div className="min-h-screen px-4 sm:px-6 pb-24 animate-fadeIn">
+    <div className="min-h-screen px-4 sm:px-6 pb-24 pt-6 animate-fadeIn">
       <div className="max-w-7xl mx-auto">
-        {/* Page Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
-          <div>
-            <div className="flex items-center gap-2 mb-1.5">
-              <span className="text-xl" aria-hidden="true">🔔</span>
-              <span className="text-xs font-bold uppercase tracking-widest text-blue-400">
-                Proactive Intelligence Platform
-              </span>
-              <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-white/10 text-zinc-300 border border-white/15">
-                LIVE 7-ENGINE SCAN
-              </span>
-            </div>
-            <h1 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
-              Intelligence Alert Center
-            </h1>
-            <p className="text-zinc-400 text-sm mt-1">
-              Continuous multi-engine monitoring across your portfolio, watchlists, macro regime shifts, and EDGAR feeds.
-            </p>
-          </div>
+        {/* Page Hero Introduction Banner */}
+        <PageHero
+          title="Intelligence Alert Center"
+          category="Proactive 7-Engine Surveillance"
+          summary="Continuous multi-engine monitoring across your portfolio, watchlists, macro regime shifts, and EDGAR feeds."
+          whyItMatters="Algorithmic surveillance identifies portfolio risks and valuation anomalies instantly, preventing emotional reaction lags."
+          howToUse={[
+            "Use the top filter pills to isolate Critical or High severity alerts requiring immediate attention.",
+            "Read Today's Intelligence Brief at the top of the feed for a synthesized macroeconomic summary.",
+            "Click 'Mark Read' on resolved items to keep your surveillance feed clean and actionable.",
+          ]}
+          proTip="Pay special attention to alerts tagged as 'Catalyst', as they often precede large volume breakouts."
+        />
 
-          {/* Quick Stats Pill Strip */}
-          <div className="flex items-center gap-2 bg-black/40 backdrop-blur-md border border-white/10 p-1.5 rounded-2xl text-xs font-semibold overflow-x-auto">
+        {/* Quick Stats Pill Strip */}
+        <div className="flex items-center justify-end gap-2 mb-6 text-xs font-semibold overflow-x-auto">
+          <div className="flex items-center gap-2 bg-black/40 backdrop-blur-md border border-white/10 p-1.5 rounded-2xl">
             <span className="px-3 py-1.5 rounded-xl bg-red-500/20 text-red-300 border border-red-500/30 flex items-center gap-1.5">
               <span className="w-2 h-2 rounded-full bg-red-400 animate-pulse" />
               <span>{summary.critical + summary.high} High/Critical</span>

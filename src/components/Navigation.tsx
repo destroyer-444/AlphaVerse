@@ -1,8 +1,8 @@
 "use client";
 
 import { useState, useEffect, useCallback } from "react";
-import { motion } from "framer-motion";
-import { navigationItems } from "@/data/navigation";
+import { motion, AnimatePresence } from "framer-motion";
+import { navigationItems, groupedNavigation } from "@/data/navigation";
 import { APP_NAME } from "@/lib/constants";
 import SpotlightSearch from "@/components/common/SpotlightSearch";
 
@@ -10,6 +10,7 @@ export default function Navigation() {
   const [searchOpen, setSearchOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(true);
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [activeNavGroup, setActiveNavGroup] = useState<string | null>(null);
 
   // Global Ctrl+K / Cmd+K shortcut
   const handleGlobalKeyDown = useCallback((e: KeyboardEvent) => {
@@ -17,10 +18,11 @@ export default function Navigation() {
       e.preventDefault();
       setSearchOpen((prev) => !prev);
     }
-    if (e.key === "Escape" && dropdownOpen) {
-      setDropdownOpen(false);
+    if (e.key === "Escape") {
+      if (dropdownOpen) setDropdownOpen(false);
+      if (activeNavGroup) setActiveNavGroup(null);
     }
-  }, [dropdownOpen]);
+  }, [dropdownOpen, activeNavGroup]);
 
   useEffect(() => {
     document.addEventListener("keydown", handleGlobalKeyDown);
@@ -35,38 +37,90 @@ export default function Navigation() {
         transition={{ duration: 0.5, ease: "easeOut" }}
         role="navigation"
         aria-label="Main navigation"
-        className="fixed top-0 left-0 right-0 z-50 bg-black/60 backdrop-blur-md border-b border-white/5"
+        className="fixed top-0 left-0 right-0 z-50 bg-black/70 backdrop-blur-xl border-b border-white/10 shadow-2xl"
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 py-3">
-          <div className="flex items-center justify-between gap-4">
+          <div className="flex items-center justify-between gap-6">
             {/* Brand */}
             <a
               href="/"
               aria-label={`${APP_NAME} — Home`}
-              className="text-white font-semibold text-xl tracking-tight shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 rounded-lg px-1"
+              className="text-white font-bold text-xl tracking-tight shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 rounded-lg px-1 flex items-center gap-2"
             >
-              {APP_NAME}
+              <span className="w-2.5 h-2.5 rounded-full bg-blue-500 animate-pulse" />
+              <span>{APP_NAME}</span>
             </a>
 
-            {/* Nav Links */}
-            <div className="hidden md:flex items-center gap-6" role="menubar" aria-label="Site sections">
-              {navigationItems.map((item) => (
-                <motion.a
+            {/* Nav Links (Grouped Primary Hierarchy) */}
+            <div
+              className="hidden lg:flex items-center gap-7"
+              role="menubar"
+              aria-label="Site sections"
+              onMouseLeave={() => setActiveNavGroup(null)}
+            >
+              {groupedNavigation.Primary.map((item) => (
+                <div
                   key={item.label}
-                  href={item.href}
-                  role="menuitem"
-                  aria-label={item.label}
-                  className="relative text-zinc-400 hover:text-white transition-colors text-sm group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 rounded-md px-1 py-0.5"
-                  whileHover={{ y: -1 }}
-                  transition={{ duration: 0.15 }}
+                  className="relative py-2"
+                  onMouseEnter={() => setActiveNavGroup(item.label)}
                 >
-                  {item.label}
-                  {/* Animated underline */}
-                  <span
-                    className="absolute -bottom-0.5 left-0 h-px w-0 bg-blue-400/60 transition-all duration-200 group-hover:w-full rounded-full"
-                    aria-hidden="true"
-                  />
-                </motion.a>
+                  <a
+                    href={item.href}
+                    role="menuitem"
+                    aria-label={item.label}
+                    aria-haspopup={item.children ? "true" : undefined}
+                    aria-expanded={activeNavGroup === item.label}
+                    className={`relative flex items-center gap-1.5 transition-colors text-sm font-semibold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 rounded-md px-2 py-1 ${
+                      activeNavGroup === item.label ? "text-white bg-white/5" : "text-zinc-400 hover:text-white"
+                    }`}
+                  >
+                    <span>{item.label}</span>
+                    {item.children && (
+                      <span className="text-[10px] opacity-60">▼</span>
+                    )}
+                  </a>
+
+                  {/* Dropdown Menu for Grouped Navigation */}
+                  <AnimatePresence>
+                    {item.children && activeNavGroup === item.label && (
+                      <motion.div
+                        initial={{ opacity: 0, y: 8, scale: 0.98 }}
+                        animate={{ opacity: 1, y: 0, scale: 1 }}
+                        exit={{ opacity: 0, y: 6, scale: 0.98 }}
+                        transition={{ duration: 0.15, ease: "easeOut" }}
+                        className="absolute left-0 top-full mt-1 w-72 bg-[#0a0a0f]/95 backdrop-blur-3xl border border-white/15 rounded-2xl p-2.5 shadow-2xl z-50"
+                      >
+                        <div className="px-3 py-2 border-b border-white/5 mb-1">
+                          <p className="text-[10px] font-mono font-bold text-blue-400 uppercase tracking-wider">
+                            {item.label} Workspaces
+                          </p>
+                          <p className="text-xs text-zinc-400 font-light leading-tight mt-0.5">
+                            {item.description}
+                          </p>
+                        </div>
+                        <div className="space-y-1 pt-1">
+                          {item.children.map((child) => (
+                            <a
+                              key={child.label}
+                              href={child.href}
+                              className="block px-3 py-2 rounded-xl hover:bg-white/10 transition-colors group/child"
+                            >
+                              <div className="flex items-center justify-between text-xs font-bold text-zinc-200 group-hover/child:text-white">
+                                <span>{child.label}</span>
+                                <span className="text-blue-400 opacity-0 group-hover/child:opacity-100 transition-opacity">→</span>
+                              </div>
+                              {child.description && (
+                                <p className="text-[11px] text-zinc-400 font-light mt-0.5 leading-tight">
+                                  {child.description}
+                                </p>
+                              )}
+                            </a>
+                          ))}
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
               ))}
             </div>
 
